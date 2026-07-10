@@ -53,3 +53,11 @@ cargo run
 
 [![Demo Video](assets/demo.mp4)](assets/demo.mp4)
 
+
+## 📊 Live Dashboard
+
+👉 [Open Dashboard](https://bakome-hub.github.io/BAKOME-Vault-/dashboard.html)
+
+## 🧪 Test Report
+
+👉 [View Full Report](https://bakome-hub.github.io/BAKOME-Vault-/test-report.txt)
