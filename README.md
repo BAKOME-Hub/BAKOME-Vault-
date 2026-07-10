@@ -166,3 +166,4 @@ Founder of BAKOME_Hub — Open Source, AI, Trading, Blockchain, DeFi, Medical AI
 Built on a phone. Powered by passion. 🚀
 
 ```
+## 🚀 Démo Terminal
