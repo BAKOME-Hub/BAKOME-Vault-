@@ -167,3 +167,4 @@ Built on a phone. Powered by passion. 🚀
 
 ```
 ## 🚀 Démo Terminal
+![Démo](https://raw.githubusercontent.com/BAKOME-Hub/BAKOME-Vault-/main/demo.cast)
