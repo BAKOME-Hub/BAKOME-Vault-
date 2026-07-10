@@ -31,3 +31,25 @@
 
 ```bash
 cargo run
+
+## 📸 Visual Overview
+
+### Architecture
+![Architecture](assets/architecture.png)
+
+### Zero-Knowledge Proofs
+![ZK-Proof](assets/zkproof.png)
+
+### AI Yield Optimizer (MoE 256)
+![Yield](assets/yield.png)
+
+### Cross-Chain Bridges
+![Bridge](assets/bridge.png)
+
+### Security Audit
+![Security](assets/security.png)
+
+## 🎥 Demo
+
+[![Demo Video](assets/demo.mp4)](assets/demo.mp4)
+

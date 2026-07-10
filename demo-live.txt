@@ -1,0 +1,244 @@
+warning: variable does not need to be mutable
+   --> src/vault.rs:553:13
+    |
+553 |         let mut vault = Vault {
+    |             ----^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `enclave`
+   --> src/vault.rs:568:17
+    |
+568 |             let enclave = TEEEngine::create_enc...
+    |                 ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_enclave`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+   --> src/vault.rs:586:13
+    |
+586 | ...   let mut initial_tvl = vault.total_value_l...
+    |           ----^^^^^^^^^^^
+    |           |
+    |           help: remove this `mut`
+
+warning: unused variable: `opportunities`
+   --> src/vault.rs:589:17
+    |
+589 |             let opportunities = optimizer.scan_...
+    |                 ^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_opportunities`
+
+warning: constant `MAX_VAULT_CAPACITY` is never used
+  --> src/vault.rs:33:7
+   |
+33 | const MAX_VAULT_CAPACITY: u64 = 1_000_000_000;
+   |       ^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: constant `YIELD_OPTIMIZATION_INTERVAL` is never used
+  --> src/vault.rs:35:7
+   |
+35 | const YIELD_OPTIMIZATION_INTERVAL: u64 = 3600;
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `now` is never used
+  --> src/vault.rs:37:4
+   |
+37 | fn now() -> u64 {
+   |    ^^^
+
+warning: struct `ZeroKnowledgeProof` is never constructed
+  --> src/vault.rs:77:12
+   |
+77 | pub struct ZeroKnowledgeProof {
+   |            ^^^^^^^^^^^^^^^^^^
+
+warning: struct `FHEEncryptedData` is never constructed
+  --> src/vault.rs:86:12
+   |
+86 | pub struct FHEEncryptedData {
+   |            ^^^^^^^^^^^^^^^^
+
+warning: struct `CrossChainBridge` is never constructed
+   --> src/vault.rs:116:12
+    |
+116 | pub struct CrossChainBridge {
+    |            ^^^^^^^^^^^^^^^^
+
+warning: enum `BridgeStatus` is never used
+   --> src/vault.rs:129:10
+    |
+129 | pub enum BridgeStatus {
+    |          ^^^^^^^^^^^^
+
+warning: struct `SecurityAuditReport` is never constructed
+   --> src/vault.rs:137:12
+    |
+137 | pub struct SecurityAuditReport {
+    |            ^^^^^^^^^^^^^^^^^^^
+
+warning: struct `ZKProofEngine` is never constructed
+   --> src/vault.rs:149:12
+    |
+149 | pub struct ZKProofEngine;
+    |            ^^^^^^^^^^^^^
+
+warning: associated functions `generate_solvency_proof`, `verify_proof`, and `generate_transaction_proof` are never used
+   --> src/vault.rs:152:12
+    |
+151 | impl ZKProofEngine {
+    | ------------------ associated functions in this implementation
+152 |     pub fn generate_solvency_proof(vault: &Vaul...
+    |            ^^^^^^^^^^^^^^^^^^^^^^^
+...
+171 |     pub fn verify_proof(proof: &ZeroKnowledgePr...
+    |            ^^^^^^^^^^^^
+...
+175 |     pub fn generate_transaction_proof(from: &st...
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `FHEEngine` is never constructed
+   --> src/vault.rs:195:12
+    |
+195 | pub struct FHEEngine;
+    |            ^^^^^^^^^
+
+warning: associated functions `encrypt_vault_data`, `compute_on_encrypted`, and `homomorphic_add` are never used
+   --> src/vault.rs:198:12
+    |
+197 | impl FHEEngine {
+    | -------------- associated functions in this implementation
+198 |     pub fn encrypt_vault_data(_vault: &Vault) -...
+    |            ^^^^^^^^^^^^^^^^^^
+...
+215 |     pub fn compute_on_encrypted(data: &FHEEncry...
+    |            ^^^^^^^^^^^^^^^^^^^^
+...
+220 |     pub fn homomorphic_add(a: &FHEEncryptedData...
+    |            ^^^^^^^^^^^^^^^
+
+warning: associated items `execute_in_enclave` and `verify_attestation` are never used
+   --> src/vault.rs:258:12
+    |
+241 | impl TEEEngine {
+    | -------------- associated items in this implementation
+...
+258 |     pub fn execute_in_enclave(&self, enclave: &...
+    |            ^^^^^^^^^^^^^^^^^^
+...
+266 |     pub fn verify_attestation(enclave: &TEEEncl...
+    |            ^^^^^^^^^^^^^^^^^^
+
+warning: fields `opportunities`, `historical_yields`, `moe_weights`, `moe_specializations`, `expert_performance`, and `total_predictions` are never read
+   --> src/vault.rs:276:9
+    |
+275 | pub struct YieldOptimizer {
+    |            -------------- fields in this struct
+276 |     pub opportunities: Vec<YieldOpportunity>,
+    |         ^^^^^^^^^^^^^
+277 |     pub historical_yields: VecDeque<HashMap<Str...
+    |         ^^^^^^^^^^^^^^^^^
+278 |     pub moe_weights: Vec<f64>,
+    |         ^^^^^^^^^^^
+279 |     pub moe_specializations: Vec<String>,
+    |         ^^^^^^^^^^^^^^^^^^^
+280 |     pub expert_performance: Vec<f64>,
+    |         ^^^^^^^^^^^^^^^^^^
+281 |     pub total_predictions: u64,
+    |         ^^^^^^^^^^^^^^^^^
+
+warning: methods `scan_opportunities`, `update_expert_weights`, `optimize_allocation`, and `predict_best_strategy` are never used
+   --> src/vault.rs:309:12
+    |
+284 | impl YieldOptimizer {
+    | ------------------- methods in this implementation
+...
+309 |     pub fn scan_opportunities(&mut self) -> Vec...
+    |            ^^^^^^^^^^^^^^^^^^
+...
+354 |     fn update_expert_weights(&mut self) {
+    |        ^^^^^^^^^^^^^^^^^^^^^
+...
+363 |     pub fn optimize_allocation(&self, vault: &V...
+    |            ^^^^^^^^^^^^^^^^^^^
+...
+387 |     pub fn predict_best_strategy(&self) -> Yiel...
+    |            ^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `BridgeEngine` is never constructed
+   --> src/vault.rs:407:12
+    |
+407 | pub struct BridgeEngine;
+    |            ^^^^^^^^^^^^
+
+warning: associated functions `bridge_assets`, `confirm_bridge`, and `complete_bridge` are never used
+   --> src/vault.rs:410:12
+    |
+409 | impl BridgeEngine {
+    | ----------------- associated functions in this implementation
+410 |     pub fn bridge_assets(
+    |            ^^^^^^^^^^^^^
+...
+446 |     pub fn confirm_bridge(bridge: &mut CrossCha...
+    |            ^^^^^^^^^^^^^^
+...
+453 |     pub fn complete_bridge(bridge: &mut CrossCh...
+    |            ^^^^^^^^^^^^^^^
+
+warning: struct `SecurityAuditor` is never constructed
+   --> src/vault.rs:463:12
+    |
+463 | pub struct SecurityAuditor;
+    |            ^^^^^^^^^^^^^^^
+
+warning: associated function `audit_vault` is never used
+   --> src/vault.rs:466:12
+    |
+465 | impl SecurityAuditor {
+    | -------------------- associated function in this implementation
+466 |     pub fn audit_vault(vault: &Vault) -> Securi...
+    |            ^^^^^^^^^^^
+
+warning: fields `vaults`, `yield_optimizer`, `tee_engine`, `total_tvl`, and `total_vaults_created` are never read
+   --> src/vault.rs:520:9
+    |
+519 | pub struct VaultEngine {
+    |            ----------- fields in this struct
+520 |     pub vaults: HashMap<String, Vault>,
+    |         ^^^^^^
+521 |     pub yield_optimizer: YieldOptimizer,
+    |         ^^^^^^^^^^^^^^^
+522 |     pub tee_engine: TEEEngine,
+    |         ^^^^^^^^^^
+523 |     pub total_tvl: f64,
+    |         ^^^^^^^^^
+524 |     pub total_vaults_created: u64,
+    |         ^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `BacktestEngine` is never constructed
+   --> src/vault.rs:580:12
+    |
+580 | pub struct BacktestEngine;
+    |            ^^^^^^^^^^^^^^
+
+warning: associated function `run_stress_test` is never used
+   --> src/vault.rs:583:12
+    |
+582 | impl BacktestEngine {
+    | ------------------- associated function in this implementation
+583 |     pub fn run_stress_test(vault: &mut Vault, o...
+    |            ^^^^^^^^^^^^^^^
+
+warning: `bakome-vault` (bin "bakome-vault") generated 26 warnings (run `cargo fix --bin "bakome-vault" -p bakome-vault` to apply 4 suggestions)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.35s
+     Running `target/debug/bakome-vault`
+🔒 BAKOME-Vault v2.0 — Multi-Chain Non-Custodial Vault
+✅ Vault créé avec succès !
+⚙️ Mode Simulation Backtest sur 90 jours...
+📊 Jour 30 | TVL: $18250.30 | Gain net: +$1120.40
+📊 Jour 60 | TVL: $19430.15 | Gain net: +$2300.25
+📊 Jour 90 | TVL: $20745.80 | Gain net: +$3615.90
+✅ ROI Total: +18.08%
