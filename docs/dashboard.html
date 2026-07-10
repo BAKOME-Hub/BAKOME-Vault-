@@ -9,6 +9,90 @@
         .green { color: #10b981; }
         table { width: 100%; border-collapse: collapse; }
         th, td { padding: 10px; text-align: left; border-bottom: 1px solid #333; }
+        /* WIDGET WEB3 + AI */
+        .web3-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+        .web3-toggle {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #7c3aed;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        .web3-toggle:hover { transform: scale(1.1); }
+        .web3-panel {
+            display: none;
+            position: fixed;
+            bottom: 85px;
+            right: 20px;
+            width: 380px;
+            max-height: 500px;
+            background: rgba(10,10,30,0.95);
+            border: 1px solid #7c3aed;
+            border-radius: 15px;
+            padding: 20px;
+            z-index: 999;
+            overflow-y: auto;
+            backdrop-filter: blur(15px);
+        }
+        .web3-panel.active { display: block; }
+        .web3-section {
+            margin-bottom: 15px;
+            padding: 12px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            border-left: 3px solid #7c3aed;
+        }
+        .web3-section h4 {
+            color: #7c3aed;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        .web3-section .value {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #fff;
+        }
+        .web3-chat {
+            margin-top: 10px;
+        }
+        .web3-chat input {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-family: monospace;
+        }
+        .web3-chat button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            background: #7c3aed;
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .web3-chat .response {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            font-size: 0.9em;
+            max-height: 150px;
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body>
@@ -39,5 +123,86 @@
         <h3>⛓️ Supported Chains</h3>
         <p>Ethereum | Solana | BSC | Polygon | Avalanche | Arbitrum | Optimism | Base | Linea | Scroll | zkSync | Starknet</p>
     </div>
+    <div class="web3-widget">
+        <button class="web3-toggle" onclick="toggleWeb3()">🌐</button>
+        <div class="web3-panel" id="web3-panel">
+            <div class="web3-section">
+                <h4>◎ Solana Wallet</h4>
+                <div class="value" id="sol-balance">Loading...</div>
+                <small style="color:#888;">H6tTSr7...Kys</small>
+            </div>
+            <div class="web3-section">
+                <h4>📊 DexScreener — SOL/USDC</h4>
+                <div class="value" id="dex-price">Loading...</div>
+                <small id="dex-change" style="color:#888;"></small>
+            </div>
+            <div class="web3-section">
+                <h4>🔄 Jupiter Best Swap</h4>
+                <div class="value" id="jupiter-quote">Loading...</div>
+                <small style="color:#888;">SOL → USDC</small>
+            </div>
+            <div class="web3-section">
+                <h4>🤖 AI Assistant (Pollinations)</h4>
+                <div class="web3-chat">
+                    <input type="text" id="ai-question" placeholder="Ask about crypto, security, trading...">
+                    <button onclick="askAI()">Ask AI</button>
+                    <div class="response" id="ai-response">AI ready. Ask me anything!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleWeb3() { document.getElementById("web3-panel").classList.toggle("active"); }
+        
+        async function loadWeb3Data() {
+            try {
+                const balanceResp = await fetch("https://api.mainnet-beta.solana.com", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "getBalance", params: ["H6tTSr7zhzBQbjqg34NAmM3X46WQjFgZZJeExxuPHKys"] })
+                });
+                const balanceData = await balanceResp.json();
+                const sol = (balanceData.result?.value / 1e9).toFixed(4);
+                document.getElementById("sol-balance").textContent = sol + " SOL";
+            } catch(e) { document.getElementById("sol-balance").textContent = "RPC limit"; }
+            
+            try {
+                const dexResp = await fetch("https://api.dexscreener.com/latest/dex/search?q=SOL/USDC");
+                const dexData = await dexResp.json();
+                if (dexData.pairs?.length > 0) {
+                    const pair = dexData.pairs[0];
+                    document.getElementById("dex-price").textContent = "$" + parseFloat(pair.priceUsd).toFixed(2);
+                    const change = pair.priceChange?.h24 || 0;
+                    const changeEl = document.getElementById("dex-change");
+                    changeEl.textContent = (change > 0 ? "+" : "") + change.toFixed(2) + "% 24h";
+                    changeEl.style.color = change > 0 ? "#10b981" : "#ef4444";
+                }
+            } catch(e) { document.getElementById("dex-price").textContent = "Loading..."; }
+            
+            try {
+                const jupResp = await fetch("https://quote-api.jup.ag/v6/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&amount=100000000&slippageBps=50");
+                const jupData = await jupResp.json();
+                if (jupData.outAmount) {
+                    const usdc = (parseInt(jupData.outAmount) / 1e6).toFixed(2);
+                    document.getElementById("jupiter-quote").textContent = "0.1 SOL → " + usdc + " USDC";
+                }
+            } catch(e) { document.getElementById("jupiter-quote").textContent = "Loading..."; }
+        }
+        
+        async function askAI() {
+            const question = document.getElementById("ai-question").value;
+            const responseDiv = document.getElementById("ai-response");
+            if (!question) return;
+            responseDiv.textContent = "Thinking...";
+            try {
+                const resp = await fetch("https://text.pollinations.ai/" + encodeURIComponent(question + " Be concise, max 150 words."));
+                const text = await resp.text();
+                responseDiv.textContent = text.substring(0, 500);
+            } catch(e) { responseDiv.textContent = "AI unavailable. Try again."; }
+        }
+        
+        loadWeb3Data();
+        setInterval(loadWeb3Data, 30000);
+    </script>
 </body>
 </html>
