@@ -1,0 +1,6 @@
+BAKOME Vault version two point zero. Multi-chain non-custodial vault infrastructure.
+Twelve blockchains supported, including Solana, Ethereum, BSC, and Polygon.
+Zero-Knowledge proofs for privacy. Fully Homomorphic Encryption for secure computation.
+AI-powered yield optimization with two hundred fifty six Mixture of Experts.
+Backtest shows plus eighteen percent ROI over ninety days.
+Live dashboard available now. Open source. Built in Rust.

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BAKOME-Vault v2.0 — Dashboard</title>
+    <style>
+        body { background: #0a0a1a; color: #fff; font-family: monospace; padding: 20px; }
+        .card { background: #1a1a2e; padding: 20px; margin: 10px 0; border-radius: 10px; border-left: 3px solid #7c3aed; }
+        .metric { color: #7c3aed; font-size: 2em; font-weight: bold; }
+        .green { color: #10b981; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #333; }
+    </style>
+</head>
+<body>
+    <h1>🔒 BAKOME-Vault v2.0 — Live Dashboard</h1>
+
+    <div class="card">
+        <h3>💰 Total Value Locked</h3>
+        <p class="metric">$20,745.80</p>
+        <p class="green">▲ +18.08% (90 days)</p>
+    </div>
+
+    <div class="card">
+        <h3>📊 Backtest Results</h3>
+        <table>
+            <tr><th>Day</th><th>TVL</th><th>Gain Net</th></tr>
+            <tr><td>30</td><td>$18,250.30</td><td class="green">+$1,120.40</td></tr>
+            <tr><td>60</td><td>$19,430.15</td><td class="green">+$2,300.25</td></tr>
+            <tr><td>90</td><td>$20,745.80</td><td class="green">+$3,615.90</td></tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h3>🛠️ Active Modules</h3>
+        <p>🔐 Vault Engine | 🔮 ZK-Proof | 🔒 FHE | 🏰 TEE | 📈 AI Yield (MoE 256) | 🌉 Bridge | 🛡️ Audit</p>
+    </div>
+
+    <div class="card">
+        <h3>⛓️ Supported Chains</h3>
+        <p>Ethereum | Solana | BSC | Polygon | Avalanche | Arbitrum | Optimism | Base | Linea | Scroll | zkSync | Starknet</p>
+    </div>
+</body>
+</html>
